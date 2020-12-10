@@ -1,0 +1,27 @@
+<h3><u>Cart</u></h3>
+
+<div *ngIf="items.length < 1">
+	<span>No items in the cart.</span>
+</div>
+
+<div class="cart-item" *ngFor="let product of items, index as productId">
+	<span> {{ product.name }} </span> <span> - </span>
+	<span> {{ product.price | currency }} </span>
+	<app-cart-delete-button [productId]="productId"></app-cart-delete-button>
+</div>
+
+<div *ngIf="items.length > 0">
+	<hr />
+	<h3>Shipping Prices</h3>
+	<app-shipping></app-shipping>
+
+	<hr />
+	<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+		<div>
+			<label for="name">Name</label>
+			<input id="name" type="text" formControlName="name">
+  </div>
+
+			<button class="button" type="submit">Purchase</button>
+	</form>
+</div>
